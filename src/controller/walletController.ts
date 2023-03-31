@@ -25,7 +25,26 @@ class WalletController {
         } catch (e) {
             res.status(500).json(e.message);
         }
+    }
 
+    edit = async (req, res) => {
+        try {
+            let id = req.params.id
+            let newWallet = await this.WalletService.updateWallet(id, req.body)
+            res.status(200).json(newWallet)
+        }catch (e) {
+            res.status(500).json(e.message);
+
+        }
+    }
+
+    delete = async (req, res) => {
+        try {
+            let id = req.params.id
+            res.status(200).json(await this.WalletService.delete(id))
+        }catch (e) {
+            res.status(500).json(e.message);
+        }
     }
 }
 

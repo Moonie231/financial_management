@@ -28,7 +28,11 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({ default: 0 }),
     __metadata("design:type", Number)
-], Wallet.prototype, "totalMoney", void 0);
+], Wallet.prototype, "incomeMoney", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: 0 }),
+    __metadata("design:type", Number)
+], Wallet.prototype, "payMoney", void 0);
 Wallet = __decorate([
     (0, typeorm_1.Entity)()
 ], Wallet);

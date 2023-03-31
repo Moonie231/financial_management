@@ -8,5 +8,7 @@ export class Wallet {
     @Column({type: "int"})
     user: number
     @Column({default :0})
-    totalMoney: number
+    incomeMoney: number
+    @Column({default :0})
+    payMoney: number
 }
