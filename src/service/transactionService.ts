@@ -8,7 +8,7 @@ class TransactionService {
     }
     getAll = async (id) =>{
         let sql = `select * from transaction join category on transaction.category = category.idCategory 
-         WHERE wallet = ${id}`
+         WHERE transaction.wallet = ${id}`
         return await this.transactionRepository.query(sql)
     }
     save = async (transaction) =>{
