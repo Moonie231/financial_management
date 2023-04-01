@@ -59,7 +59,7 @@ class WalletService {
     editMoney = async (id, idWallet, type, money) => {
         let d = Number(money)
         let moneyTransaction = await this.transactionService.findById(id)
-        let a = Number(moneyTransaction.money)
+        let a = Number(moneyTransaction.moneyTransaction)
         let moneyWallet = await this.walletRepository.findOneBy({idWallet: idWallet})
         let b = Number(moneyWallet.incomeMoney)
         let g = Number(moneyWallet.payMoney)
@@ -74,7 +74,7 @@ class WalletService {
     deleteMoney = async (id) => {
         let transaction = await this.transactionService.findById(id)
         let idWallet = transaction.wallet
-        let a = transaction.money
+        let a = transaction.moneyTransaction
         let type = transaction.type
         let moneyWallet = await this.walletRepository.findOneBy({idWallet: idWallet})
         let b = moneyWallet.payMoney
