@@ -10,6 +10,10 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 class UserService {
     constructor() {
         this.register = async (user) => {
+            let userCheck = await this.userRepository.findOneBy({ userName: user.userName });
+            if (userCheck) {
+                return "Username already registered";
+            }
             user.password = await bcrypt_1.default.hash(user.password, 10);
             return this.userRepository.save(user);
         };

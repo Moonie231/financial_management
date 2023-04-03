@@ -23,15 +23,15 @@ class TransactionController {
         this.create = async (req, res) => {
             try {
                 let newTransaction = {
-                    wallet: req.params.wallet,
+                    wallet: req.body.wallet,
                     category: req.body.category,
                     type: req.body.type,
-                    money: req.body.money,
+                    moneyTransaction: req.body.moneyTransaction,
                     month: new Date().getMonth() + 1,
                     date: new Date().getDate()
                 };
                 await transactionService_1.default.save(newTransaction);
-                await walletService_1.default.addMoney(req.params.wallet, req.body.type, req.body.money);
+                await walletService_1.default.addMoney(req.body.wallet, req.body.type, req.body.moneyTransaction);
                 res.status(200).json("add ok");
             }
             catch (e) {
@@ -53,18 +53,19 @@ class TransactionController {
             try {
                 let id = req.params.id;
                 let newTransaction = {
-                    wallet: req.params.wallet,
+                    wallet: req.body.wallet,
                     category: req.body.category,
                     type: req.body.type,
-                    money: req.body.money,
+                    moneyTransaction: req.body.moneyTransaction,
                     month: new Date().getMonth() + 1,
                     date: new Date().getDate()
                 };
-                await walletService_1.default.editMoney(id, req.params.wallet, req.body.type, req.body.money);
+                await walletService_1.default.editMoney(id, req.body.wallet, req.body.type, req.body.moneyTransaction);
                 await transactionService_1.default.update(id, newTransaction);
                 res.status(200).json('Update Success !!!');
             }
             catch (e) {
+                console.log(e.message);
                 res.status(500).json(e.message);
             }
         };

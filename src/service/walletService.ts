@@ -88,5 +88,4 @@ class WalletService {
         }
     }
 }
-
 export default new WalletService()

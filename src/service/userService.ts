@@ -12,6 +12,10 @@ class UserService {
     }
 
     register = async (user) => {
+        let userCheck = await this.userRepository.findOneBy({userName: user.userName})
+        if (userCheck){
+            return "Username already registered"
+        }
         user.password = await bcrypt.hash(user.password, 10)
         return this.userRepository.save(user)
     }

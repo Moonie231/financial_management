@@ -21,15 +21,15 @@ class TransactionController {
     create = async (req: Request, res :Response)=>{
         try{
             let newTransaction = {
-                wallet: req.params.wallet,
+                wallet: req.body.wallet,
                 category: req.body.category,
                 type: req.body.type,
-                money: req.body.money,
+                moneyTransaction: req.body.moneyTransaction,
                 month: new Date().getMonth() + 1,
                 date: new Date().getDate()
             }
             await transactionService.save(newTransaction)
-            await walletService.addMoney(req.params.wallet,req.body.type,req.body.money)
+            await walletService.addMoney(req.body.wallet,req.body.type,req.body.moneyTransaction)
             res.status(200).json("add ok")
         }
         catch (e){
@@ -51,17 +51,18 @@ class TransactionController {
         try {
             let id = req.params.id
             let newTransaction = {
-                wallet: req.params.wallet,
+                wallet: req.body.wallet,
                 category: req.body.category,
                 type: req.body.type,
-                money: req.body.money,
+                moneyTransaction: req.body.moneyTransaction,
                 month: new Date().getMonth() + 1,
                 date: new Date().getDate()
             }
-            await walletService.editMoney(id,req.params.wallet,req.body.type,req.body.money)
+            await walletService.editMoney(id,req.body.wallet,req.body.type,req.body.moneyTransaction)
             await transactionService.update(id,newTransaction)
             res.status(200).json('Update Success !!!')
         }  catch (e){
+            console.log(e.message)
             res.status(500).json(e.message)
         }
     }
